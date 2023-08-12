@@ -26,6 +26,26 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  let teacher = await Teacher.findOne({_id: req.params.id,})
+
+  try{
+    if(!teacher){
+      res.status(404).json({
+        message: 'Teacher no found!',
+        teacher,
+      });
+    }
+
+    res.status(200).json({
+      message: 'Teacher found!',
+      teacher,
+    });
+  }catch(err){
+    res.status(500).send(err)
+  }
+})
+
 router.post('/', async (req, res) => {
   if (!mongoose.isValidObjectId(req.body.subjects)) {
     return res.status(400).json('One or more subjects id does not exist.');
@@ -93,4 +113,19 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+router.delete('/:id', async (req, res) => {
+  if (!Teacher.findById(req.params.id)) {
+    res.status(400).json('Teacher id does not exist.');
+  }
+
+  try {
+    await Teacher.findByIdAndRemove(req.params.id);
+
+    res.status(200).json({
+      message: 'Teacher deleted!',
+    });
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
+});
 module.exports = router;

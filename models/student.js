@@ -43,7 +43,7 @@ const StudentSchema = mongoose.Schema({
   ],
   schedules:[
     {
-      type : mongoose.Schema.Types.ObjectId(),
+      type : mongoose.Schema.Types.ObjectId,
       ref: 'Schedule',
     }
   ],
@@ -57,4 +57,4 @@ const StudentSchema = mongoose.Schema({
   },
 });
 
-module.expotrs = mongoose.model('Student', StudentSchema);
+module.exports = mongoose.rs = mongoose.model('Student', StudentSchema);

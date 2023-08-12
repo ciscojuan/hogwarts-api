@@ -13,6 +13,7 @@ const port = process.env.PORT || 38600;
 const subjectRouter = require('./routes/subject');
 const scheduleRouter = require('./routes/schedule');
 const teacherRouter = require('./routes/teacher');
+const studentRouter = require('./routes/student');
 //cargar rutas
 const api = process.env.API_URL;
 //middlewares
@@ -21,10 +22,8 @@ app.use(morgan('dev'));
 app.use(cors());
 app.options('*', cors());
 
-
-
-//app.use(`${api}/students`, require('./routes/student'));
-//app.use(`${api}/teachers`, require('./routes/teacher'));
+//routes
+app.use(`${api}/students`, studentRouter);
 app.use(`${api}/subjects`, subjectRouter);
 app.use(`${api}/schedules`, scheduleRouter);
 app.use(`${api}/teachers`, teacherRouter);

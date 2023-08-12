@@ -17,6 +17,19 @@ router.get('/', async (req, res) => {
   });
 });
 
+router.get('/:id', async (req, res) => {
+  const subject = await Subject.findOne({_id :req.params.id});
+
+  if (!subject) {
+    res.status(400).json({ message: 'No subjects found.' });
+  }
+
+  res.status(200).json({
+    message: 'Subjects fetched successfully.',
+    subject,
+  });
+});
+
 router.post('/', async (req, res) => {
   try {
     const date = moment();
