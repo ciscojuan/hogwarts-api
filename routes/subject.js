@@ -5,7 +5,7 @@ const moment = require('moment');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const subjects = await Subject.find();
+  const subjects = await Subject.find().select('-createAt');
 
   if (!subjects) {
     res.status(400).json({ message: 'No subjects found.' });
@@ -32,13 +32,11 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const date = moment();
-    const currentDate = date.format('DD/MM/YYYY');
-
+ 
     const subject = await Subject.create({
       name: req.body.name,
-      createAT: currentDate,
-      updateAT: currentDate,
+      createAT: Date.now(),
+      updateAT: Date.now(),
     });
 
     res.status(201).json({
@@ -97,8 +95,7 @@ router.delete('/:id', async (req, res) => {
     });
   } catch (err) {
     res.status(500).send({
-      message: 'Something happened when trying to delete the subject.',
-      error: err,
+      Error: err,
     });
   }
 

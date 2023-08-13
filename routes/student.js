@@ -71,7 +71,7 @@ router.post('/', async (req, res) =>{
 try{
   student = await student.save();
 
-  res(200).json({
+  res.status(200).json({
     message : 'Student created Successfully.',
     student
   })
@@ -115,6 +115,22 @@ router.put('/:id', async (req, res) =>{
   }
   
 
+})
+
+router.delete('/:id', async (req, res) =>{
+  
+  if(!mongoose.isValidObjectId(req.params.id)){
+    res.status(404).json({message : 'Student no found.'})
+  }
+
+  try{
+
+    await Student.findByIdAndRemove();
+
+    res.status(200).json({message : 'Student removed successfuly'})
+  }catch(err){
+    res.status(500).json({Error : err})
+  }
 })
 
 module.exports = router;

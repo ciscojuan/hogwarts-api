@@ -31,10 +31,11 @@ router.get('/:id', async (req, res) => {
 
   try {
 
-    const schedule = await Schedule.findOne({ _id: req.params.id })
+    const schedule = await Schedule.findOne({ _id: req.params.id }).populate('subject')
 
     res.status(200).json({
       message: 'Schedule loaded successful.',
+      schedule
 
     })
 
