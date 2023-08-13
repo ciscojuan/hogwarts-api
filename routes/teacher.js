@@ -1,5 +1,6 @@
 const express = require('express');
 const Teacher = require('../models/teacher');
+const Grade =require('../models/grade');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
@@ -128,4 +129,6 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ error: err });
   }
 });
+
+
 module.exports = router;

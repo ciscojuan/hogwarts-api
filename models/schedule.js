@@ -3,25 +3,27 @@ const mongoose = require('mongoose');
 
 const ScheduleSchema = mongoose.Schema({
   weekDay: {
-    type: String,
+    type: [String],
     enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
     required: true,
   },
-  startTime :{
+  startTime: {
     type: String,
     required: true,
     default: '08:00'
   },
-  endTime :{
+  endTime: {
     type: String,
     required: true,
-    default: '17:00'
+    default: '10:30'
   },
-  subject: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref : 'Subject',
-    required: true,
-  }
+  subject: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Subject',
+      required: true,
+    }
+  ]
 });
 
 module.exports = mongoose.model('Schedule', ScheduleSchema);

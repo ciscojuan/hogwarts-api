@@ -31,14 +31,13 @@ const StudentSchema = mongoose.Schema({
   grades: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Subject',
-      grade: Number,
-    },
+      ref: 'Grade'
+    }
   ],
   subjects: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'subject',
+      ref: 'Subject', 
     }
   ],
   schedules:[
